@@ -117,13 +117,13 @@ async def goodbot(ctx):
 
 @bot.command(name="afk")
 async def toggle_afk(ctx):
-	role=discord.utils.get(ctx.guild.roles,name="AFK")
-	if role not in ctx.author.roles:
-		await ctx.send(f"Don't worry!:sweat_smile:\n{ctx.author.name} is not banned (yet) or anything.\nHe/she is just taking a break! He/she'll be right back... hopefully.",mention_author=True)
-		await ctx.author.add_roles(role)
-	else:
+	afk=discord.utils.get(ctx.guild.roles,name="AFK")
+	if afk in ctx.author.roles():
 		await ctx.send(f"Hey, would you look at that!\n{ctx.author.name} is back.",mention_author=True)
-		await ctx.author.remove_roles(role)
+		await ctx.author.remove_roles(afk)
+	else:
+		await ctx.send(f"Don't worry!:sweat_smile:\n{ctx.author.name} is not banned (yet) or anything.\nHe/she is just taking a break! He/she'll be right back... hopefully.",mention_author=True)
+		await ctx.author.add_roles(afk)
 
 """
 @bot.command(name="thankyou")
@@ -153,7 +153,7 @@ async def on_command_error(ctx,error):
 			color=0x070a24
 		)
 		await ctx.reply(embed=e)
-	print(f"{ctx.author} has entered the {chr(34)}{ctx.command}{chr(34)}, which is not a valid command...")
+	print(f"{ctx.author} has entered the {chr(34)}{ctx.command}{chr(34)} command, which is not a valid command...")
 
 # --- END OF BOT COMMANDS SECTION ---
 
