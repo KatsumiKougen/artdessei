@@ -116,13 +116,14 @@ async def goodbot(ctx):
 	await ctx.reply(f"Thank you {str(ctx.author.mention)}",mention_author=True)
 
 @bot.command(name="afk")
-async def afk(ctx):
+async def toggle_afk(ctx):
+	role=discord.utils.get(ctx.guild.roles,name="AFK")
 	if role not in ctx.author.roles:
-		await ctx.send(f"Don't worry!:sweat_smile:\n{ctx.author[:-5]} is not banned (yet) or anything.\nHe/she is just taking a break! He/she'll be right back... hopefully.",mention_author=True)
-		await ctx.author.add_roles(854689838809088000)
+		await ctx.send(f"Don't worry!:sweat_smile:\n{ctx.author.name} is not banned (yet) or anything.\nHe/she is just taking a break! He/she'll be right back... hopefully.",mention_author=True)
+		await ctx.author.add_roles(role)
 	else:
-		await ctx.send(f"Hey, would you look at that!\n{ctx.author[:-5]} is back.",mention_author=True)
-		await ctx.author.remove_roles(854689838809088000)
+		await ctx.send(f"Hey, would you look at that!\n{ctx.author.name} is back.",mention_author=True)
+		await ctx.author.remove_roles(role)
 
 """
 @bot.command(name="thankyou")
