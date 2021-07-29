@@ -148,17 +148,6 @@ async def toggle_afk(ctx):
         await ctx.author.add_roles(afk)
 
 
-"""
-@bot.command(name="thankyou")
-async def talk(ctx):
-    e=discord.Embed(
-        description="**Thanks to the people at Python Discord for helping my creator :hugging:**",
-        color=r.randrange(0x1000000)
-    )
-    await ctx.send(embed=e)
-"""
-
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
@@ -176,5 +165,4 @@ async def on_command_completion(ctx):
 
 
 bot.run(TOKEN)
-# Thanks to my brothers and sisters at Python Discord for helping me build the bot _-(^U^)-"
 
