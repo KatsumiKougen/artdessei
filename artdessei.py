@@ -8,18 +8,15 @@ GUILD = os.getenv("DISCORD_GUILD")
 
 # --- BOT INITIALISATION SECTION ---
 
-bot = commands.Bot(command_prefix="`")
-
+bot = commands.Bot(command_prefix="[a]")
 
 @bot.event
 async def on_ready():
     print(f"Today is {time.asctime()}. Artdessei has logged in.")
 
-
 # --- END OF BOT INITIALISATION SECTION ---
 
 # --- BOT COMMANDS SECTION ---
-
 
 @bot.command(name="date")
 async def getdate(ctx):
@@ -38,7 +35,6 @@ async def getdate(ctx):
     timeformat = f"{day[timeunit[0]]}, {timeunit[2]}. {timeunit[1]} {timeunit[4]}"
     await ctx.send(f"Today is:\n```{timeformat}```\n***Stay fresh!***")
 
-
 @bot.command(name="list")
 async def getlist(ctx):
     with open("list.md", "r") as f:
@@ -48,7 +44,6 @@ async def getlist(ctx):
     )
     await ctx.send(embed=e)
 
-
 @bot.command(name="credit")
 async def botcredit(ctx):
     with open("credit.md", "r") as f:
@@ -56,11 +51,9 @@ async def botcredit(ctx):
     e = discord.Embed(title="Credits", description=credit, color=r.randrange(0x1000000))
     await ctx.send(embed=e)
 
-
 @bot.command(name="pekofy")
 async def pekofy(ctx, string: str):
     await ctx.send(pkf.pekofy(string))
-
 
 @pekofy.error
 async def pekofy_error(ctx, error):
@@ -81,11 +74,9 @@ async def pekofy_error(ctx, error):
         await ctx.reply(embed=e)
     print("Command error: pekofy")
 
-
 @bot.command(name="ultra")
 async def ultra(ctx, string: str):
     await ctx.send(us.UltraFormat(string))
-
 
 @ultra.error
 async def ultra_error(ctx, error):
@@ -105,18 +96,15 @@ async def ultra_error(ctx, error):
     await ctx.reply(embed=e)
     print("Command error: ultra")
 
-
 @bot.command(name="baltan")
 async def baltan(ctx):
     with open("baltan.png", "rb") as f:
         await ctx.send(file=discord.File(f))
 
-
 @bot.command(name="shuwatch")
 async def shuwatch(ctx):
     with open("shuwatch.md", "r") as f:
         await ctx.send(f.read())
-
 
 @bot.command(name="instance_domination")
 async def instdom(ctx):
@@ -125,28 +113,9 @@ async def instdom(ctx):
     ) as f:
         await ctx.send(file=discord.File(f))
 
-
 @bot.command(name="good_bot")
 async def goodbot(ctx):
     await ctx.reply(f"Thank you {str(ctx.author.mention)}", mention_author=True)
-
-
-@bot.command(name="afk")
-async def toggle_afk(ctx):
-    afk = discord.utils.get(ctx.guild.roles, name="AFK")
-    if afk in ctx.author.roles():
-        await ctx.send(
-            f"Hey, would you look at that!\n{ctx.author.name} is back.",
-            mention_author=True,
-        )
-        await ctx.author.remove_roles(afk)
-    else:
-        await ctx.send(
-            f"Don't worry!:sweat_smile:\n{ctx.author.name} is not banned (yet) or anything.\nHe/she is just taking a break! He/she'll be right back... hopefully.",
-            mention_author=True,
-        )
-        await ctx.author.add_roles(afk)
-
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -155,14 +124,10 @@ async def on_command_error(ctx, error):
             f"{ctx.author} has entered the {chr(34)}{ctx.command}{chr(34)} command, which is not a valid command..."
         )
 
-
 # --- END OF BOT COMMANDS SECTION ---
-
 
 @bot.event
 async def on_command_completion(ctx):
     print(f"{ctx.author} has entered the {chr(34)}{ctx.command}{chr(34)} command.")
 
-
 bot.run(TOKEN)
-
